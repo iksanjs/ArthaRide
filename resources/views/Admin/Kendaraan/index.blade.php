@@ -34,11 +34,8 @@
 
           <!-- PTipe Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800 mr-auto">Data Surat Pemesanan Penyewaan Kendaraan</h1>
+            <h1 class="h3 mb-0 text-gray-800 mr-auto">Kelola Data Kendaraan Sewa</h1>
             <div>
-              <a href="{{ route('sppk.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm mr-2">
-                <i class="fas fa-plus fa-sm text-white-50"></i> Tambah
-              </a>
               <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
               </a>
@@ -53,7 +50,7 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
               <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Data SPPK</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Data Kendaraan</h6>
               </div>
               <div class="card-body">
                   <div class="table-responsive">
@@ -61,61 +58,38 @@
                           <thead>
                               <tr>
                                   <th>No</th>
-                                  <th>ID SPPK</th>
-                                  <th>Tanggal SPPK</th>
-                                  <th>Nama PT</th>
-                                  <th>Nama Cabang</th>
-                                  <th>Nama Pemakai</th>
-                                  <th>Kategori</th>
+                                  <th>No Polisi</th>
                                   <th>Merk</th>
                                   <th>Tipe</th>
-                                  <th>Biaya Sewa</th>
-                                  <th colspan="2">Periode Sewa</th>
+                                  <th>Jenis Kendaraan</th>
+                                  <th>Lokasi</th>
+                                  <th>Status</th>
                                   <th>Approval</th>
-                                  <th>Aksi</th>
                               </tr>
                           </thead>
                           <tfoot>
                               <tr>
                                   <th>No</th>
-                                  <th>ID SPPK</th>
-                                  <th>Tanggal SPPK</th>
-                                  <th>Nama PT</th>
-                                  <th>Nama Cabang</th>
-                                  <th>Nama Pemakai</th>
-                                  <th>Kategori</th>
+                                  <th>No Polisi</th>
                                   <th>Merk</th>
                                   <th>Tipe</th>
-                                  <th>Biaya Sewa</th>
-                                  <th colspan="2">Periode Sewa</th>
+                                  <th>Jenis Kendaraan</th>
+                                  <th>Lokasi</th>
+                                  <th>Status</th>
                                   <th>Approval</th>
-                                  <th>Aksi</th>
                               </tr>
                           </tfoot>
                           <tbody>
-                            @foreach ($sppks as $sppk)
+                            @foreach ($kendaraans as $kendaraan)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{$sppk['id_sppk']}}</td>
-                                    <td>{{$sppk['tgl_sppk']}}</td>
-                                    <td>{{$sppk['nama_pt']}}</td>
-                                    <td>{{$sppk['nama_cabang']}}</td>
-                                    <td>{{$sppk['nama']}}</td>
-                                    <td>{{$sppk['kategori']}}</td>
-                                    <td>{{$sppk['merk']}}</td>
-                                    <td>{{$sppk['tipe']}}</td>
-                                    <td>{{$sppk['biaya_sewa']}}</td>
-                                    <td>{{$sppk['tgl_awal']}}</td>
-                                    <td>{{$sppk['tgl_akhir']}}</td>
-                                    <td>{{$sppk['approval']}}</td>
-                                    <td>
-                                        <a href="{{route('sppk.edit', $sppk['id_sppk'])}}" class="btn btn-primary btn-icon-split btn-sm">
-                                            <span class="icon text-white-50">
-                                                <i class="fas fa-edit"></i>
-                                            </span>
-                                            <span class="text">Revisi</span>
-                                        </a>
-                                    </td>
+                                    <td>{{ $kendaraan->no_polisi }}</td>
+                                    <td>{{ $kendaraan->merk }}</td>
+                                    <td>{{ $kendaraan->tipe }}</td>
+                                    <td>{{ $kendaraan->kategori }}</td>
+                                    <td>{{ $kendaraan->lokasi }}</td>
+                                    <td>{{ $kendaraan->status }}</td>
+                                    <td>{{ $kendaraan->approval }}</td>
                                 </tr>
                             @endforeach
                           </tbody>
@@ -123,8 +97,6 @@
                   </div>
               </div>
           </div>
-
-
             </div>
         <!-- /.container-fluid -->
 

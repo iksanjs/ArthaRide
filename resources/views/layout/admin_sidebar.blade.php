@@ -14,7 +14,7 @@
     
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="{{ url('/dashboard') }}">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
     </li>
@@ -128,7 +128,7 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
     
-    <!-- Heading -->
+    {{-- <!-- Heading -->
     <div class="sidebar-heading">
       Service Kendaraan
     </div>
@@ -158,6 +158,18 @@
           <a class="collapse-item" href="#">Data Bengkel</a>
         </div>
       </div>
+    </li> --}}
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url('/service') }}">
+        <i class="fas fa-fw fa-cogs"></i>
+        <span>Service</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url('/bengkel') }}">
+        <i class="fas fa-fw fa-wrench"></i>
+        <span>Bengkel</span>
+      </a>
     </li>
     
     <!-- Divider -->

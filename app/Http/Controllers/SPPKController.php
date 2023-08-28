@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
 
 class SPPKController extends Controller
 {
@@ -14,12 +15,29 @@ class SPPKController extends Controller
      */
     public function index()
     {
-        $url = 'http://localhost:8003/api/sewa/sppks'; // Ganti dengan URL Lumen yang sesuai
+        $token = session('jwt_token'); // Ambil token dari session
 
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+        ])->get('http://localhost:8008/api/me');
+
+        $userData = $response->json();
+        
+        $url = env('LUMEN_API_URL_SEWA') . '/api/sewa/sppks'; // Ganti dengan URL Lumen yang sesuai
         $response = Http::get($url);
         $sppks = $response->json();
 
-        return view('SPPK.index', ['sppks' => $sppks]);
+        if ($userData['user']['role'] == 'Admin') {
+            return view('Admin.SPPK.index', ['sppks' => $sppks]);
+        } elseif ($userData['user']['role'] == 'Pengurus') {
+            return view('Pengurus.SPPK.index', ['sppks' => $sppks]);
+        } elseif ($userData['user']['role'] == 'Akuntan') {
+            return view('Akuntan.SPPK.index', ['sppks' => $sppks]);
+        } else {
+            return view('auth.login');
+        }
+
+        return view('Admin.SPPK.index', ['sppks' => $sppks]);
     }
 
     /**
@@ -29,7 +47,7 @@ class SPPKController extends Controller
      */
     public function create()
     {
-        return view('SPPK.create');
+        return view('Admin.SPPK.create');
     }
 
     /**
@@ -40,12 +58,12 @@ class SPPKController extends Controller
      */
     public function store(Request $request)
     {
-        $url = 'http://localhost:8003/api/sewa/sppks';
+        $url = env('LUMEN_API_URL_SEWA') . '/api/sewa/sppks';
 
         $response = Http::post($url, $request->all());
 
         if ($response->successful()) {
-            return redirect()->route('SPPK.index')->with('success', 'Data berhasil disimpan.');
+            return redirect()->route('Admin.SPPK.index')->with('success', 'Data berhasil disimpan.');
         } else {
             return back()->withInput()->withErrors(['message' => 'Gagal menyimpan data.']);
         }
@@ -70,12 +88,12 @@ class SPPKController extends Controller
      */
     public function edit($id_sppk)
     {
-        $url = "http://localhost:8003/api/sewa/sppks/$id_sppk";
+        $url = env('LUMEN_API_URL_SEWA') . "/api/sewa/sppks/$id_sppk";
         $response = Http::get($url);
 
         if ($response->successful()) {
             $sppk = $response->json();
-            return view('SPPK.edit', compact('sppk'));
+            return view('Admin.SPPK.edit', compact('sppk'));
         } else {
             return back()->withErrors(['message' => 'Gagal mengambil data SPPK.']);
         }
@@ -107,7 +125,7 @@ class SPPKController extends Controller
             'tgl_akhir' => 'required',
             'biaya_sewa' => 'required',
         ]);
-        $url = "http://localhost:8003/api/sewa/sppks/$id_sppk";
+        $url = env('LUMEN_API_URL_SEWA') . "/api/sewa/sppks/$id_sppk";
         try {
             $response = Http::put($url, [
                 'json' => $validatedData
@@ -115,7 +133,7 @@ class SPPKController extends Controller
             
             if ($response->getStatusCode() == 200) {
                 // Respons sukses, tangani sesuai kebutuhan
-                return redirect()->route('sppk.index');
+                return redirect()->route('admin.sppk.index');
             } else {
                 // Tangani respons error
                 $errorResponse = json_decode($response->getBody(), true);
@@ -136,5 +154,28 @@ class SPPKController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function approved($id_sppk)
+    {
+        $url = env('LUMEN_API_URL_SEWA') . "/api/sewa/sppks/$id_sppk/approve";
+        $response = Http::put($url);
+
+        if ($response->successful()) {
+            return redirect()->route('sppk.index')->with('success', 'Data SPPK berhasil diapprove.');
+        } else {
+            return back()->withErrors(['message' => 'Gagal Approve data SPPK.']);
+        }
+    }
+    public function rejected($id_sppk)
+    {
+        $url = env('LUMEN_API_URL_SEWA') . "/api/sewa/sppks/$id_sppk/reject";
+        $response = Http::put($url);
+
+        if ($response->successful()) {
+            return redirect()->route('sppk.index')->with('success', 'Data SPPK berhasil di Riject.');
+        } else {
+            return back()->withErrors(['message' => 'Gagal Reject data SPPK.']);
+        }
     }
 }
