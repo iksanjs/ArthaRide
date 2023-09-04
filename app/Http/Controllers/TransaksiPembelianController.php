@@ -14,7 +14,7 @@ class TransaksiPembelianController extends Controller
      */
     public function index()
     {
-        $url = 'http://localhost:8006/api/kendaraan/transaksipembelians'; // Ganti dengan URL Lumen yang sesuai
+        $url = env('LUMEN_API_URL_KENDARAAN') . '/api/kendaraan/transaksipembelians'; // Ganti dengan URL Lumen yang sesuai
 
         $response = Http::get($url);
         $transaksi_pembelians = $response->json();

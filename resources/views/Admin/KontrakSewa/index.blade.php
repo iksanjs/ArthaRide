@@ -34,11 +34,8 @@
 
           <!-- PTipe Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800 mr-auto">Data Surat Pemesanan Penyewaan Kendaraan</h1>
+            <h1 class="h3 mb-0 text-gray-800 mr-auto">Data Kontrak Sewa</h1>
             <div>
-              <a href="{{ route('sppk.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm mr-2">
-                <i class="fas fa-plus fa-sm text-white-50"></i> Tambah
-              </a>
               <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
               </a>
@@ -53,61 +50,57 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
               <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Data SPPK</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Data Kontrak Sewa</h6>
               </div>
               <div class="card-body">
                   <div class="table-responsive">
                       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                           <thead>
                               <tr>
-                                  <th>No</th>
-                                  <th>ID SPPK</th>
-                                  <th>Tanggal SPPK</th>
-                                  <th>Nama PT</th>
-                                  <th>Nama Cabang</th>
-                                  <th>Nama Pemakai</th>
-                                  <th>Kategori</th>
-                                  <th>Merk</th>
-                                  <th>Tipe</th>
-                                  <th>Biaya Sewa</th>
-                                  <th colspan="2">Periode Sewa</th>
-                                  <th>Approval</th>
+                                    <th>No</th>
+                                    <th>ID Kontrak Sewa</th>
+                                    <th>Tanggal Sewa</th>
+                                    <th>Tanggal Akhir</th>
+                                    <th>Biaya Sewa</th>
+                                    <th>No Polisi</th>
+                                    <th>ID Penyewa</th>
+                                    <th>ID Pemakai</th>
+                                    <th>Status</th>
+                                    <th>Approval</th>
+                                    <th>Keterangan</th>
                               </tr>
                           </thead>
                           <tfoot>
                               <tr>
-                                  <th>No</th>
-                                  <th>ID SPPK</th>
-                                  <th>Tanggal SPPK</th>
-                                  <th>Nama PT</th>
-                                  <th>Nama Cabang</th>
-                                  <th>Nama Pemakai</th>
-                                  <th>Kategori</th>
-                                  <th>Merk</th>
-                                  <th>Tipe</th>
-                                  <th>Biaya Sewa</th>
-                                  <th colspan="2">Periode Sewa</th>
-                                  <th>Approval</th>
+                                    <th>No</th>
+                                    <th>ID Kontrak Sewa</th>
+                                    <th>Tanggal Sewa</th>
+                                    <th>Tanggal Akhir</th>
+                                    <th>Biaya Sewa</th>
+                                    <th>No Polisi</th>
+                                    <th>ID Penyewa</th>
+                                    <th>ID Pemakai</th>
+                                    <th>Status</th>
+                                    <th>Approval</th>
+                                    <th>Keterangan</th>
                               </tr>
                           </tfoot>
                           <tbody>
-                            @foreach ($sppks[0] as $sppk)
+                                @foreach ($kontraksewas as $kontraksewa)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{$sppk['id_sppk']}}</td>
-                                    <td>{{$sppk['tgl_sppk']}}</td>
-                                    <td>{{$sppk['nama_pt']}}</td>
-                                    <td>{{$sppk['nama_cabang']}}</td>
-                                    <td>{{$sppk['nama']}}</td>
-                                    <td>{{$sppk['kategori']}}</td>
-                                    <td>{{$sppk['merk']}}</td>
-                                    <td>{{$sppk['tipe']}}</td>
-                                    <td>{{$sppk['biaya_sewa']}}</td>
-                                    <td>{{$sppk['tgl_awal']}}</td>
-                                    <td>{{$sppk['tgl_akhir']}}</td>
-                                    <td>{{$sppk['approval']}}</td>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$kontraksewa['id_kontraksewa']}}</td>
+                                    <td>{{$kontraksewa['tgl_sewa']}}</td>
+                                    <td>{{$kontraksewa['tgl_akhir']}}</td>
+                                    <td>{{$kontraksewa['biaya_sewa']}}</td>
+                                    <td>{{$kontraksewa['no_polisi']}}</td>
+                                    <td>{{$kontraksewa['id_penyewa']}}</td>
+                                    <td>{{$kontraksewa['id_pemakai']}}</td>
+                                    <td>{{$kontraksewa['status']}}</td>
+                                    <td>{{$kontraksewa['approval']}}</td>
+                                    <td>{{$kontraksewa['keterangan']}}</td>
                                 </tr>
-                            @endforeach
+                                @endforeach
                           </tbody>
                       </table>
                   </div>
@@ -186,19 +179,20 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-6 mb-4">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Revisi SPPK</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Daftar Antrian Kontrak Sewa (SPPK)</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                    <th>No</th>
-                                    <th>ID SPPK</th>
-                                    <th colspan="2">Aksi</th>
+                                        <th>No</th>
+                                        <th>ID SPPK</th>
+                                        <th colspan="2">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -209,20 +203,21 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                  @foreach ($sppks[1] as $sppk)
                                     <tr>
+                                        @foreach ($antrian_sppks as $antrian_sppk)
                                         <td>{{$loop->iteration}}</td>
-                                        <td>{{$sppk['id_sppk']}}</td>
+                                        <td>{{$antrian_sppk['id_sppk']}}</td>
                                         <td>
-                                          <a href="{{route('sppk.edit', $sppk['id_sppk'])}}" class="btn btn-primary btn-icon-split btn-sm">
+                                          <a href="{{ route('kontraksewa.create', ['id_sppk' => $antrian_sppk['id_sppk']]) }}" class="btn btn-success btn-icon-split btn-sm">
                                               <span class="icon text-white-50">
-                                                  <i class="fas fa-edit"></i>
+                                                  <i class="fas fa-credit-card"></i>
                                               </span>
-                                              <span class="text">Revisi</span>
+                                              <span class="text">Buat</span>
                                           </a>
+                                          
                                         </td>
                                         <td>
-                                            <button class="btn btn-info btn-icon-split btn-sm" data-toggle="modal" data-target="#detailModal{{$sppk['id_sppk']}}">
+                                            <button class="btn btn-info btn-icon-split btn-sm" data-toggle="modal" data-target="#detailModal">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-info-circle"></i>
                                                 </span>
@@ -230,16 +225,96 @@
                                             </button>
                                         </td>
                                     </tr>
-                                  @endforeach
+                                    @endforeach
                                 </tbody>
                             </table>
-
-                            @foreach ($sppks[1] as $sppk)
-                            <div class="modal fade" id="detailModal{{$sppk['id_sppk']}}" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+          
+                              <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h4 class="modal-title" id="detailModalLabel">Detail SPPK</h4>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <div class="row">
+                                        <table class="table">
+                                          <tbody>
+                                            <tr>
+                                              <td colspan="4"><h5><b>Data Transaksi Pembelian</b></h5></td>
+                                            </tr>
+                                            <tr>
+                                              <td><b>Id SPPK</b></td>
+                                              <td><b></b></td>
+                                              <td><b>Tanggal SPPK</b></td>
+                                              <td></td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Revisi Kontrak Sewa</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                    <th>No</th>
+                                    <th>ID Kontrak Sewa</th>
+                                    <th colspan="2">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>ID Kontrak Sewa</th>
+                                        <th colspan="2">Aksi</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                          <a href="#" class="btn btn-primary btn-icon-split btn-sm">
+                                              <span class="icon text-white-50">
+                                                  <i class="fas fa-edit"></i>
+                                              </span>
+                                              <span class="text">Revisi</span>
+                                          </a>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-info btn-icon-split btn-sm" data-toggle="modal" data-target="#detailModal">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </span>
+                                                <span class="text">Detail</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            @foreach ($kontraksewas as $kontraksewa)
+                            <div class="modal fade" id="detailModal{{$kontraksewa['id_kontraksewa']}}" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                    <h4 class="modal-title" id="detailModalLabel">Detail SPPK</h4>
+                                    <h4 class="modal-title" id="detailModalLabel">Detail kontraksewa</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -249,13 +324,13 @@
                                         <table class="table">
                                         <tbody>
                                             <tr>
-                                            <td colspan="4"><h5><b>Data SPPK</b></h5></td>
+                                            <td colspan="4"><h5><b>Data kontraksewa</b></h5></td>
                                             </tr>
                                             <tr>
-                                            <td><b>ID SPPK</b></td>
-                                            <td><b>{{$sppk['id_sppk']}}</b></td>
-                                            <td><b>Tanggal SPPK</b></td>
-                                            <td>{{$sppk['tgl_sppk']}}</td>
+                                            <td><b>ID kontraksewa</b></td>
+                                            <td><b>{{$kontraksewa['id_kontraksewa']}}</b></td>
+                                            <td><b>Tanggal kontraksewa</b></td>
+                                            <td></td>
                                             </tr>
                                             </tr>
                                             <tr>
@@ -263,58 +338,58 @@
                                             </tr>
                                             <tr>
                                             <td><b>Nama PT</b></td>
-                                            <td>{{$sppk['nama_pt']}}</td>
+                                            <td></td>
                                             <td><b>Nama Cabang</b></td>
-                                            <td>{{$sppk['nama_cabang']}}</td>
+                                            <td></td>
                                             </tr>
                                             <tr>
                                             <td><b>Alamat</b></td>
-                                            <td>{{$sppk['alamat']}}</td>
+                                            <td></td>
                                             </tr>
                                             <tr>
                                             <td colspan="4"><h5><b>Data Kendaraan</b></h5></td>
                                             </tr>
                                             <tr>
                                             <td><b>Kategori</b></td>
-                                            <td>{{$sppk['kategori']}}</td>
+                                            <td></td>
                                             <td><b>Tipe</b></td>
-                                            <td>{{$sppk['tipe']}}</td>
+                                            <td></td>
                                             </tr>
                                             <tr>
                                             <td><b>Merk</b></td>
-                                            <td>{{$sppk['merk']}}</td>
+                                            <td></td>
                                             <td><b>Tahun</b></td>
-                                            <td>{{$sppk['tahun']}}</td>
+                                            <td></td>
                                             </tr>
                                             <tr>
                                             <td><b>Warna</b></td>
-                                            <td>{{$sppk['warna']}}</td>
+                                            <td></td>
                                             </tr>
                                             <tr>
                                             <td colspan="4"><h5><b>Data Pemakai</b></h5></td>
                                             </tr>
                                             <tr>
                                             <td><b>Nama</b></td>
-                                            <td>{{$sppk['nama']}}</td>
+                                            <td></td>
                                             <td><b>Jabatan</b></td>
-                                            <td>{{$sppk['jabatan']}}</td>
+                                            <td></td>
                                             </tr>
                                             <tr>
                                             <td><b>No HP</b></td>
-                                            <td>{{$sppk['no_hp']}}</td>
+                                            <td></td>
                                             </tr>
                                             <tr>
                                             <td colspan="4"><h5><b>Data Sewa</b></h5></td>
                                             </tr>
                                             <tr>
                                             <td><b>Biaya Sewa</b></td>
-                                            <td>{{$sppk['biaya_sewa']}}</td>
+                                            <td></td>
                                             <td><b>Periode Sewa</b></td>
-                                            <td>{{$sppk['tgl_awal']}} s/d {{$sppk['tgl_akhir']}}</td>
+                                            <td></td>
                                             </tr>
                                             <tr>
                                               <td><b>Keterangan</b></td>
-                                              <td colspan="3">{{$sppk['keterangan']}}</td>
+                                              <td colspan="3"></td>
                                             </tr>
                                         </tbody>
                                         </table>

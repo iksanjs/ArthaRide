@@ -19,7 +19,7 @@ class SPPKController extends Controller
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token,
-        ])->get('http://localhost:8008/api/me');
+        ])->get(env('LUMEN_API_URL_AUTH') . '/api/me');
 
         $userData = $response->json();
         
@@ -63,7 +63,7 @@ class SPPKController extends Controller
         $response = Http::post($url, $request->all());
 
         if ($response->successful()) {
-            return redirect()->route('Admin.SPPK.index')->with('success', 'Data berhasil disimpan.');
+            return redirect()->route('sppk.index')->with('success', 'Data berhasil disimpan.');
         } else {
             return back()->withInput()->withErrors(['message' => 'Gagal menyimpan data.']);
         }

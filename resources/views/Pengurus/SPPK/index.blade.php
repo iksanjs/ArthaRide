@@ -120,44 +120,77 @@
           </div>
 
           <!-- Content Row -->
-            <div class="row">
-                <div class="col-lg-6 mb-4">
-                    <div class="card shadow">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Status SPPK</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Status</th>
-                                            <th>Jumlah</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th>SPPK</th>
-                                            <th></th>
-                                        </tr>
-                                        <tr>
-                                            <td>Proses Approval</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Reject</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Approved</td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+          <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Status Transaksi Sewa</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Jumlah</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Surat Pengajuan Permohonan Sewa</th>
+                                        <th>0</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Proses Approval</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Reject</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Approved</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kontrak Sewa</th>
+                                        <th>0</th>
+                                    </tr>
+                                    <tr>
+                                    <td>Proses Approval</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>Reject</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>Approved</td>
+                                    <td>0</td>
+                                </tr>
+                                    <tr>
+                                        <th>Berita Serah Terima Kendaraan</th>
+                                        <th>0</th>
+                                        
+                                    <tr>
+                                    <td>Proses Approval</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>Reject</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>Approved</td>
+                                    <td>0</td>
+                                </tr>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
+            </div>
 
                 <div class="col-lg-6 mb-4">
                     <div class="card shadow mb-4">

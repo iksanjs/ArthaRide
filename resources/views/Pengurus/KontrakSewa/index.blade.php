@@ -34,7 +34,7 @@
 
           <!-- PTipe Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800 mr-auto">Approval Data Bengkel</h1>
+            <h1 class="h3 mb-0 text-gray-800 mr-auto">Kontrak Sewa</h1>
             <div>
               <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
@@ -42,52 +42,67 @@
             </div>
           </div>
           
+          
+          
+
           <!-- Content Row -->
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
               <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Data Data Bengkel</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Data Kontrak Sewa</h6>
               </div>
               <div class="card-body">
                   <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                  <th>No</th>
-                                  <th>ID Bengkel</th>
-                                  <th>Nama Bengkel</th>
-                                  <th>Jenis Bengkel</th>
-                                  <th>Alamat Bengkel</th>
-                                  <th>No Telepon</th>
-                                  <th>Status Approval</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                  <th>No</th>
-                                  <th>ID Bengkel</th>
-                                  <th>Nama Bengkel</th>
-                                  <th>Jenis Bengkel</th>
-                                  <th>Alamat Bengkel</th>
-                                  <th>No Telepon</th>
-                                  <th>Status Approval</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                          @foreach ($hasil as $bengkel)
-                          <tr>
-                              <td>{{$loop->iteration}}</td>
-                              <td>{{$bengkel['id_bengkel']}}</td>
-                              <td>{{$bengkel['nama_bengkel']}}</td>
-                              <td>{{$bengkel['jenis_bengkel']}}</td>
-                              <td>{{$bengkel['alamat_bengkel']}}</td>
-                              <td>{{$bengkel['nomor_telepon']}}</td>
-                              <td>{{$bengkel['approval']}}</td>
-                          </tr>
-                          @endforeach
-                        </tbody>
-                    </table>
+                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                          <thead>
+                              <tr>
+                                    <th>No</th>
+                                    <th>ID Kontrak Sewa</th>
+                                    <th>Tanggal Sewa</th>
+                                    <th>Tanggal Akhir</th>
+                                    <th>Biaya Sewa</th>
+                                    <th>No Polisi</th>
+                                    <th>ID Penyewa</th>
+                                    <th>ID Pemakai</th>
+                                    <th>Status</th>
+                                    <th>Approval</th>
+                                    <th>Keterangan</th>
+                              </tr>
+                          </thead>
+                          <tfoot>
+                              <tr>
+                                    <th>No</th>
+                                    <th>ID Kontrak Sewa</th>
+                                    <th>Tanggal Sewa</th>
+                                    <th>Tanggal Akhir</th>
+                                    <th>Biaya Sewa</th>
+                                    <th>No Polisi</th>
+                                    <th>ID Penyewa</th>
+                                    <th>ID Pemakai</th>
+                                    <th>Status</th>
+                                    <th>Approval</th>
+                                    <th>Keterangan</th>
+                              </tr>
+                          </tfoot>
+                          <tbody>
+                                @foreach ($kontraksewas as $kontraksewa)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$kontraksewa['id_kontraksewa']}}</td>
+                                    <td>{{$kontraksewa['tgl_sewa']}}</td>
+                                    <td>{{$kontraksewa['tgl_akhir']}}</td>
+                                    <td>{{$kontraksewa['biaya_sewa']}}</td>
+                                    <td>{{$kontraksewa['no_polisi']}}</td>
+                                    <td>{{$kontraksewa['id_penyewa']}}</td>
+                                    <td>{{$kontraksewa['id_pemakai']}}</td>
+                                    <td>{{$kontraksewa['status']}}</td>
+                                    <td>{{$kontraksewa['approval']}}</td>
+                                    <td>{{$kontraksewa['keterangan']}}</td>
+                                </tr>
+                                @endforeach
+                          </tbody>
+                      </table>
                   </div>
               </div>
           </div>
@@ -97,7 +112,7 @@
             <div class="col-lg-6 mb-4">
                 <div class="card shadow">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Status Service Kendaraan</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Status Transaksi Sewa</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -110,7 +125,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th>Data Service</th>
+                                        <th>Surat Pengajuan Permohonan Sewa</th>
                                         <th>0</th>
                                     </tr>
                                     <tr>
@@ -126,7 +141,7 @@
                                         <td>0</td>
                                     </tr>
                                     <tr>
-                                        <th>Data Bengkel</th>
+                                        <th>Kontrak Sewa</th>
                                         <th>0</th>
                                     </tr>
                                     <tr>
@@ -141,6 +156,23 @@
                                     <td>Approved</td>
                                     <td>0</td>
                                 </tr>
+                                    <tr>
+                                        <th>Berita Serah Terima Kendaraan</th>
+                                        <th>0</th>
+                                        
+                                    <tr>
+                                    <td>Proses Approval</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>Reject</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>Approved</td>
+                                    <td>0</td>
+                                </tr>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -150,7 +182,7 @@
             <div class="col-lg-6 mb-4">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Approval Data Bengkel</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Approval Kontrak Sewa</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -158,24 +190,24 @@
                                 <thead>
                                     <tr>
                                     <th>No</th>
-                                    <th>ID Bengkel</th>
+                                    <th>ID Kontrak Sewa</th>
                                     <th colspan="3">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th>No</th>
-                                        <th>ID Bengkel</th>
+                                        <th>ID Kontrak Sewa</th>
                                         <th colspan="3">Aksi</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    @foreach ($prosesbengkels as $bengkel)
+                                    @foreach ($proses_kontraksewas as $proses_kontraksewa)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
-                                        <td>{{$bengkel['id_bengkel']}}</td>
+                                        <td>{{$proses_kontraksewa['id_kontraksewa']}}</td>
                                         <td>
-                                            <button class="btn btn-warning btn-icon-split btn-sm" data-toggle="modal" data-target="#rejectModal{{$bengkel['id_bengkel']}}">
+                                            <button class="btn btn-warning btn-icon-split btn-sm" data-toggle="modal" data-target="#rejectModal{{$proses_kontraksewa['id_kontraksewa']}}">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-flag"></i>
                                                 </span>
@@ -183,7 +215,7 @@
                                             </button>
                                         </td>
                                         <td>
-                                        <button class="btn btn-success btn-icon-split btn-sm" data-toggle="modal" data-target="#approveModal{{$bengkel['id_bengkel']}}">
+                                        <button class="btn btn-success btn-icon-split btn-sm" data-toggle="modal" data-target="#approveModal{{$proses_kontraksewa['id_kontraksewa']}}">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-check-square"></i>
                                             </span>
@@ -192,7 +224,7 @@
                                         
                                         </td>
                                         <td>
-                                            <button class="btn btn-info btn-icon-split btn-sm" data-toggle="modal" data-target="#detailModal{{$bengkel['id_bengkel']}}">
+                                            <button class="btn btn-info btn-icon-split btn-sm" data-toggle="modal" data-target="#detailModal{{$proses_kontraksewa['id_kontraksewa']}}">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-info-circle"></i>
                                                 </span>
@@ -203,19 +235,19 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                                @foreach ($prosesbengkels as $bengkel)
                                 <!-- Modal Approve pengajuan_pembelian -->
-                                <div class="modal fade" id="approveModal{{$bengkel['id_bengkel']}}" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel" aria-hidden="true">
+                                @foreach ($proses_kontraksewas as $proses_kontraksewa)
+                                <div class="modal fade" id="approveModal{{$proses_kontraksewa['id_kontraksewa']}}" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="approveModalLabel">Approve Data Bengkel</h5>
+                                                <h5 class="modal-title" id="approveModalLabel">Approve SPPK</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-footer">
-                                                <form action="{{route('bengkel.approved', $bengkel['id_bengkel'])}}" method="POST">
+                                                <form action="{{route('kontraksewa.approved', $proses_kontraksewa['id_kontraksewa'])}}" method="POST">
                                                     @csrf
                                                     @method('PUT')
                                                     <button type="submit" class="btn btn-success">

@@ -18,7 +18,7 @@ class AuthController extends Controller
             'name' => 'required',
             'role' => 'required',
         ]);
-        $response = Http::post('http://localhost:8008/api/register', [
+        $response = Http::post(env('LUMEN_API_URL_AUTH') . '/api/register', [
             'username' => $request->username,
             'password' => $request->password,
             'password_confirmation' =>$request->password_confirmation,
@@ -38,7 +38,7 @@ class AuthController extends Controller
             'username' => 'required',
             'password' => 'required',
         ]);
-        $response = Http::post('http://localhost:8008/api/login', [
+        $response = Http::post(env('LUMEN_API_URL_AUTH') . '/api/login', [
             'username' => $request->username,
             'password' => $request->password,
         ]);
@@ -72,7 +72,7 @@ class AuthController extends Controller
         // Lakukan request ke API untuk melakukan logout
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token,
-        ])->post('http://localhost:8008/api/logout');
+        ])->post(env('LUMEN_API_URL_AUTH') . '/api/logout');
 
         if ($response->successful()) {
             // Jika logout berhasil, arahkan pengguna ke halaman login
@@ -90,7 +90,7 @@ class AuthController extends Controller
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token,
-        ])->get('http://localhost:8008/api/me');
+        ])->get(env('LUMEN_API_URL_AUTH') . '/api/me');
 
         $userData = $response->json();
 

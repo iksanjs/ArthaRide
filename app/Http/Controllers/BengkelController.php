@@ -19,18 +19,28 @@ class BengkelController extends Controller
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token,
-        ])->get('http://localhost:8008/api/me');
+        ])->get(env('LUMEN_API_URL_AUTH') . '/api/me');
 
         $userData = $response->json();
         
         $url = env('LUMEN_API_URL_SERVICE') . '/api/service/bengkels'; // Ganti dengan URL Lumen yang sesuai
         $response = Http::get($url);
-        $bengkels = $response->json();
+        $hasil = $response->json();
+
+        // Filter data berdasarkan status "Proses Approval"
+        $prosesbengkels = array_filter($hasil, function ($bengkel) {
+            return $bengkel['approval'] === 'Proses Approval';
+        });
+
+        // Filter data berdasarkan status "Approved"
+        $bengkels = array_filter($hasil, function ($bengkel) {
+            return $bengkel['approval'] === 'Approved';
+        });
 
         if ($userData['user']['role'] == 'Admin') {
             return view('Admin.Bengkel.index', ['bengkels' => $bengkels]);
         } elseif ($userData['user']['role'] == 'Pengurus') {
-            return view('Pengurus.Bengkel.index', ['bengkels' => $bengkels]);
+            return view('Pengurus.Bengkel.index', ['hasil' => $hasil, 'prosesbengkels' => $prosesbengkels]);
         } elseif ($userData['user']['role'] == 'Akuntan') {
             return view('Akuntan.Bengkel.index', ['bengkels' => $bengkels]);
         } else {
@@ -99,6 +109,29 @@ class BengkelController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function approved($id_bengkel)
+    {
+        $url = env('LUMEN_API_URL_SERVICE') . "/api/service/bengkels/$id_bengkel/approve";
+        $response = Http::put($url);
+
+        if ($response->successful()) {
+            return redirect()->route('bengkel.index')->with('success', 'Data Bengkel berhasil diapprove.');
+        } else {
+            return back()->withErrors(['message' => 'Gagal Approve data Bengkel.']);
+        }
+    }
+    public function rejected($id_bengkel)
+    {
+        $url = env('LUMEN_API_URL_SERVICE') . "/api/service/bengkels/$id_bengkel/reject";
+        $response = Http::put($url);
+
+        if ($response->successful()) {
+            return redirect()->route('bengkel.index')->with('success', 'Data Bengkel berhasil di Riject.');
+        } else {
+            return back()->withErrors(['message' => 'Gagal Reject data Bengkel.']);
+        }
     }
 
     /**

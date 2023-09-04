@@ -80,16 +80,16 @@
                               </tr>
                           </tfoot>
                           <tbody>
-                            @foreach ($kendaraans as $kendaraan)
+                            @foreach ($kendaraans[0] as $kendaraan)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $kendaraan->no_polisi }}</td>
-                                    <td>{{ $kendaraan->merk }}</td>
-                                    <td>{{ $kendaraan->tipe }}</td>
-                                    <td>{{ $kendaraan->kategori }}</td>
-                                    <td>{{ $kendaraan->lokasi }}</td>
-                                    <td>{{ $kendaraan->status }}</td>
-                                    <td>{{ $kendaraan->approval }}</td>
+                                    <td>{{ $kendaraan['no_polisi'] }}</td>
+                                    <td>{{ $kendaraan['merk'] }}</td>
+                                    <td>{{ $kendaraan['tipe'] }}</td>
+                                    <td>{{ $kendaraan['kategori'] }}</td>
+                                    <td>{{ $kendaraan['lokasi'] }}</td>
+                                    <td>{{ $kendaraan['status'] }}</td>
+                                    <td>{{ $kendaraan['approval'] }}</td>
                                 </tr>
                             @endforeach
                           </tbody>

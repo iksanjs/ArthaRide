@@ -19,20 +19,30 @@ class ServiceController extends Controller
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token,
-        ])->get('http://localhost:8008/api/me');
+        ])->get(env('LUMEN_API_URL_AUTH') . '/api/me');
 
         $userData = $response->json();
         
         $url = env('LUMEN_API_URL_SERVICE') . '/api/service/services'; // Ganti dengan URL Lumen yang sesuai
         $response = Http::get($url);
-        $services = $response->json();
+        $hasil = $response->json();
+
+        // Filter data berdasarkan status "Proses Approval"
+        $prosesservices = array_filter($hasil, function ($service) {
+            return $service['approval'] === 'Proses Approval';
+        });
+
+        // Filter data berdasarkan status "Approved"
+        $services = array_filter($hasil, function ($service) {
+            return $service['approval'] === 'Approved';
+        });
 
         if ($userData['user']['role'] == 'Admin') {
             return view('Admin.Service.index', ['services' => $services]);
         } elseif ($userData['user']['role'] == 'Pengurus') {
-            return view('Pengurus.Bengkel.index', ['services' => $services]);
+            return view('Pengurus.Service.index', ['hasil' => $hasil, 'prosesservices' => $prosesservices]);
         } elseif ($userData['user']['role'] == 'Akuntan') {
-            return view('Akuntan.Bengkel.index', ['services' => $services]);
+            return view('Akuntan.Service.index', ['services' => $services]);
         } else {
             return view('auth.login');
         }
@@ -67,7 +77,7 @@ class ServiceController extends Controller
         $response = Http::post($url, $request->all());
 
         if ($response->successful()) {
-            return redirect()->route('service.index')->with('success', 'Data berhasil disimpan.');
+            return redirect()->route('service.index')->with('success', 'Data berhasil dibuat. Menunggu Approval dari Pengurus');
         } else {
             return back()->withInput()->withErrors(['message' => 'Gagal menyimpan data.']);
         }
@@ -105,6 +115,29 @@ class ServiceController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function approved($id_service)
+    {
+        $url = env('LUMEN_API_URL_SERVICE') . "/api/service/services/$id_service/approve";
+        $response = Http::put($url);
+
+        if ($response->successful()) {
+            return redirect()->route('service.index')->with('success', 'Data Service berhasil diapprove.');
+        } else {
+            return back()->withErrors(['message' => 'Gagal Approve data Service.']);
+        }
+    }
+    public function rejected($id_service)
+    {
+        $url = env('LUMEN_API_URL_SERVICE') . "/api/service/services/$id_service/reject";
+        $response = Http::put($url);
+
+        if ($response->successful()) {
+            return redirect()->route('service.index')->with('success', 'Data Service berhasil di Riject.');
+        } else {
+            return back()->withErrors(['message' => 'Gagal Reject data Service.']);
+        }
     }
 
     /**

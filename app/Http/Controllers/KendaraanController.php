@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
 
-class STDealertoWahanaController extends Controller
+class KendaraanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +15,10 @@ class STDealertoWahanaController extends Controller
      */
     public function index()
     {
-        $url = env('LUMEN_API_URL_KENDARAAN') . '/api/kendaraan/stdealertowahanas'; // Ganti dengan URL Lumen yang sesuai
-
+        $url = env('LUMEN_API_URL_KENDARAAN') . '/api/kendaraan/kendaraans';
         $response = Http::get($url);
-        $stdealertowahanas = $response->json();
-
-        return view('Admin.STDealertoWahana.index', ['stdealertowahanas' => $stdealertowahanas]);
+        $kendaraans = $response->json();
+        return view('Admin.Kendaraan.index', ['kendaraans' => $kendaraans]);
     }
 
     /**

@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/dashboard') }}">
       <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-car"></i>
       </div>
@@ -114,7 +114,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="{{ url('/penggantian') }}">
         <i class="fas fa-fw fa-unlink"></i>
         <span>Penggantian Kendaraan</span>
       </a>

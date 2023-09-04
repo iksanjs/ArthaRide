@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
 
-class STDealertoWahanaController extends Controller
+class PenggantianController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +15,27 @@ class STDealertoWahanaController extends Controller
      */
     public function index()
     {
-        $url = env('LUMEN_API_URL_KENDARAAN') . '/api/kendaraan/stdealertowahanas'; // Ganti dengan URL Lumen yang sesuai
+        $token = session('jwt_token'); // Ambil token dari session
 
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+        ])->get(env('LUMEN_API_URL_AUTH') . '/api/me');
+
+        $userData = $response->json();
+        
+        $url = env('LUMEN_API_URL_SEWA') . '/api/sewa/penggantians'; // Ganti dengan URL Lumen yang sesuai
         $response = Http::get($url);
-        $stdealertowahanas = $response->json();
+        $penggantians = $response->json();
 
-        return view('Admin.STDealertoWahana.index', ['stdealertowahanas' => $stdealertowahanas]);
+        if ($userData['user']['role'] == 'Admin') {
+            return view('Admin.Penggantian.index', ['penggantians' => $penggantians]);
+        } elseif ($userData['user']['role'] == 'Pengurus') {
+            return view('Pengurus.Penggantian.index', ['penggantians' => $penggantians]);
+        } elseif ($userData['user']['role'] == 'Akuntan') {
+            return view('Akuntan.Penggantian.index', ['penggantians' => $penggantians]);
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**

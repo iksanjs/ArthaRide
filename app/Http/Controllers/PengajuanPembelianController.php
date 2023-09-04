@@ -14,7 +14,7 @@ class PengajuanPembelianController extends Controller
      */
     public function index()
     {
-        $url = 'http://localhost:8006/api/kendaraan/pengajuanpembelians'; // Ganti dengan URL Lumen yang sesuai
+        $url = env('LUMEN_API_URL_KENDARAAN') . '/api/kendaraan/pengajuanpembelians'; // Ganti dengan URL Lumen yang sesuai
 
         $response = Http::get($url);
         $pengajuanpembelians = $response->json();
